@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% block content %}
+<p></p>
+<div class="row pt-3">
+  <div class="col-10 text-left">
+    <h1>{{ news.title }}</h1>
+  </div>
+</div>
+<p></p>
+<div class="row pt-3">
+  <div class="col-8">
+    <img src="{{ news.image.url }}" class="img-fluid" />
+  </div>
+  <div class="col-4">
+    <a href="javascript:{document.getElementById('love{{ news.id }}').submit()}"><button class="btn btn-danger btn-sm"> <span class="oi oi-heart"></span> {{ news.votes_total }}</button></a>
+  </div>
+</div>
+<p></p>
+<br/>
+<div class="row pt-2">
+  <div class="col-4 text-left">
+    <h4> Floated by {{ news.sailor.username }}</h4>
+  </div>
+  <div class="col-4 text-right">
+    <h4><span class="oi oi-clock"></span> {{ news.pub_date_mod }}</h4>
+  </div>
+</div>
+<p></p>
+<div class="row">
+  <div class="col-8 text-left">
+    <p>{{ news.body }}</p>
+  </div>
+</div>
+
+<form action="{% url 'love' news.id %}" method="POST" id="love{{ news.id }}">
+  {% csrf_token %}
+  <input type="hidden">
+</form>
+
+
+<p></p>
+<p></p>
+<div class="text-left">
+  <a class="btn btn-default" href="{% url 'add_comment_to_post' news.id %}">Add comment</a>
+</div>
+
+{% for comment in news.comments.all %}
+<div class="row pt-2 text-left" style="align:auto">
+  <div class="col-4">
+    <h6><strong>{{ comment.author }}</strong></h6>
+  </div>
+  <div class="col-4 text-right">
+    <h6><span class="oi oi-clock"></span> {{ comment.created_date }}</h6>
+  </div>
+</div>
+<div class="text-left">
+  <p>{{ comment.text|linebreaks }}</p>
+  {% empty %}
+      <p>No comments yet. Make one?</p>
+  {% endfor %}
+</div>
+
+
+
+{% endblock %}

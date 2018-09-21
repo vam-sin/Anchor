@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+<style media="screen">
+
+</style>
+{% block content %}
+
+{% if error %}
+{{ error }}
+<br/>
+<br/>
+{% endif %}
+<br/>
+<h1>Tell your story...</h1>
+<br/>
+<div class="align-center">
+  <form class="" action="{% url 'create' %}" method="POST" enctype="multipart/form-data">
+<div class="form-group">
+  {% csrf_token %}
+  Title:
+  <br/>
+  <input type="text" class="form-control" name="title">
+  <br/>
+  Body:
+  <br/>
+  <textarea name="body" class="form-control" type="text" rows="10" cols="30"></textarea>
+  <br>
+  Icon:
+  <br/>
+  <input type="file" class="form-control" name="icon">
+  <br/>
+  Image:
+  <br/>
+  <input type="file" class="form-control" name="image">
+  <br/>
+  <br/>
+  <input class="btn btn-primary" type="submit" value="Send News.">
+</div>
+  </form>
+</div>
+
+
+{% endblock %}

@@ -1,0 +1,77 @@
+{% extends 'base.html'%}
+
+{% block content %}
+<h2 class="pt-3">Waves.</h2>
+<p></p>
+<h4 class="pt-3">Explore new stories...</h4>
+<br>
+{% for news in news.all %}
+
+
+  <div class="card ">
+    <div class="row pt-1">
+      <p></p>
+    </div>
+    <div class="row pt-3">
+      <div class="col -2">
+        <p></p>
+      </div>
+      <div class="col -6 " onclick="window.location='{% url 'detail' news.id %}';" style="cursor: pointer;">
+        <h4>{{ news.title }}</h4>
+      </div>
+      <div class="col-4">
+        <p></p>
+      </div>
+    </div>
+    <div class="row pt-3">
+      <div class="col -2">
+        <p></p>
+      </div>
+      <div class="col-6" onclick="window.location='{% url 'detail' news.id %}';" style="cursor: pointer;">
+        <img src="{{ news.icon.url }}" class="img-fluid" />
+      </div>
+      <div class="col -4">
+        <p></p>
+      </div>
+    </div>
+    <div class="row pt-3">
+      <div class="col -2">
+        <p></p>
+      </div>
+      <div class="col -4" onclick="window.location='{% url 'detail' news.id %}';" style="cursor: pointer;">
+        <h6>{{ news.summary }}</h6>
+      </div>
+      <div class="col -4">
+        <p></p>
+      </div>
+    </div>
+    <div class="row pt-2">
+      <div class="col -2">
+        <p></p>
+      </div>
+      <div class="col -2">
+        <a href="javascript:{document.getElementById('love{{ news.id }}').submit()}"><button class="btn btn-danger btn-sm"> <span class="oi oi-heart"></span> {{ news.votes_total }}</button></a>
+      </div>
+      <div class="col -1">
+        <p></p>
+      </div>
+      <div class="col -2">
+        <a class="btn btn-default" href="{% url 'add_comment_to_post' news.id %}">Add comment</a>
+      </div>
+      <div class="col -4">
+        <p></p>
+      </div>
+    </div>
+    <div class="row pt-1">
+      <p></p>
+    </div>
+  </div>
+  <br>
+
+
+<form id="love{{ news.id }}" method="POST" action="{% url 'love' news.id %}">
+  {% csrf_token %}
+  <input type="hidden">
+</form>
+{% endfor %}
+{% endblock %}

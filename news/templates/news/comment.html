@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block content %}
+
+{% if error %}
+{{ error }}
+<br/>
+<br/>
+{% endif %}
+
+<h1>How do you feel about it?</h1>
+
+<form class="" action="{% url 'news' news.id %}" method="POST" enctype="multipart/form-data">
+<div class="form-group">
+  {% csrf_token %}
+  Comment:
+  <br/>
+  <input type="text" class="form-control" name="comment">
+  <br/>
+  <br/>
+  <input class="btn btn-primary" type="submit" value="Add Comment.">
+</div>
+</form>
+
+
+{% endblock %}
