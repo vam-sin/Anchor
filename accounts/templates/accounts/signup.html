@@ -34,7 +34,7 @@
 </nav>
     </header>
     <div class="container">
-      <h2 class="pt-3">Register.</h2>
+      <h2 class="pt-3 text-center">Register.</h2>
 
       <br/>
       {% if error %}
@@ -43,21 +43,23 @@
       {% endif %}
 
       <form class="" action="{% url 'signup' %}" method="POST">
-      {% csrf_token %}
-      Username:
-      <br/>
-      <input type="text" name="username" value="">
-      <br/>
-      Password:
-      <br/>
-      <input type="password" name="password1" value="">
-      <br/>
-      Confirm Password:
-      <br/>
-      <input type="password" name="password2" value="">
-      <br/>
-      <br/>
-      <input type="submit" class="btn btn-primary" name="" value="Register.">
+      <div class="form-group">
+        {% csrf_token %}
+        Username:
+        <br/>
+        <input type="text" class="form-control" name="username" value="">
+        <br/>
+        Password:
+        <br/>
+        <input type="password" class="form-control" name="password1" value="">
+        <br/>
+        Confirm Password:
+        <br/>
+        <input type="password" class="form-control" name="password2" value="">
+        <br/>
+        <br/>
+        <input type="submit" class="btn btn-primary align-center" name="" value="Register.">
+      </div>
       </form>
     </div>
 
