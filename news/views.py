@@ -35,12 +35,17 @@ def login(request):
 @login_required
 def create(request):
     if request.method=='POST':
-        if request.POST['title'] and request.POST['body'] and request.FILES['icon'] and request.FILES['image']:
+        if request.POST['title'] and request.POST['body']:
             news=News()
             news.title=request.POST['title']
             news.body=request.POST['body']
-            news.icon=request.FILES['icon']
-            news.image=request.FILES['image']
+
+            if request.FILES.get('icon'):
+                news.icon=request.FILES['icon']
+
+            if request.FILES.get('image'):
+                news.image=request.FILES['image']
+
             news.pub_date=timezone.datetime.now()
             news.sailor=request.user
             news.save()
@@ -48,7 +53,7 @@ def create(request):
 
 
         else:
-            return render(request,'news/create.html',{'error':'All fields are required.'})
+            return render(request,'news/create.html',{'error':'Title and Body are required.'})
 
     else:
         return render(request,'news/create.html')
@@ -64,7 +69,15 @@ def love(request,news_id):
         news=get_object_or_404(News,pk=news_id)
         news.votes_total+=1
         news.save()
-        return redirect('/news/' + str(news.id))
+        return redirect('feed')
+
+@login_required
+def love1(request,news_id):
+    if request.method=='POST':
+        news=get_object_or_404(News,pk=news_id)
+        news.votes_total+=1
+        news.save()
+        return redirect('/news/' +str(news.id))
 
 @login_required
 def logout(request):

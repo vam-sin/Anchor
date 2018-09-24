@@ -27,9 +27,13 @@
       <div class="col -2">
         <p></p>
       </div>
+      {% if news.icon %}
       <div class="col-6" onclick="window.location='{% url 'detail' news.id %}';" style="cursor: pointer;">
-        <img src="{{ news.icon.url }}" class="img-fluid" />
+
+          <img src="{{ news.icon.url }}" class="img-fluid" />
+      {% endif %}
       </div>
+
       <div class="col -4">
         <p></p>
       </div>

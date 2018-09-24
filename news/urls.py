@@ -7,6 +7,7 @@ urlpatterns = [
     path('account',views.account,name='account'),
     path('<int:news_id>',views.detail,name="detail"),
     path('<int:news_id>/love',views.love,name='love'),
+    path('<int:news_id>/love1',views.love1,name='love1'),
     path('',views.login,name='login'),
     path('<int:news_id>/add_comment_to_post',views.add_comment_to_post,name='add_comment_to_post'),
 ]

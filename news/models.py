@@ -8,8 +8,8 @@ class News(models.Model):
     title=models.CharField(max_length=255)
     pub_date=models.DateTimeField()
     body=models.TextField()
-    image=models.ImageField(upload_to='images/')
-    icon=models.ImageField(upload_to='images/')
+    image=models.ImageField(upload_to='images/',default='')
+    icon=models.ImageField(upload_to='images/',default='')
     votes_total=models.IntegerField(default=1)
     sailor=models.ForeignKey(User,on_delete=models.CASCADE)
     def pub_date_mod(self):
@@ -18,6 +18,7 @@ class News(models.Model):
         return self.title
     def summary(self):
         return self.body[:100]
+
 
 class Comment(models.Model):
     post = models.ForeignKey('news.News', on_delete=models.CASCADE, related_name='comments')
