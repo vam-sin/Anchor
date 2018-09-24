@@ -93,6 +93,7 @@ def add_comment_to_post(request,news_id):
         if form.is_valid():
             comment = form.save(commit=False)
             comment.post = news
+            comment.author=request.user
             comment.save()
             return redirect('/news/'+str(news.id))
     else:
