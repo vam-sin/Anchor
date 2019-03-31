@@ -1,6 +1,6 @@
 # Description
 
-Anchor is a Django back-end based blog. The blog allows you to register yourslef onto the platorm and start posting about under the sun. It also allows you to post comments and heart react the posts made by other user.
+Anchor is a Django back-end based blog. The blog allows you to register yourself onto the platorm and start posting about under the sun. It also allows you to post comments and heart react the posts made by other user.
 
 ## Dependencies
 
